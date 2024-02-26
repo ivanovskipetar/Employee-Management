@@ -1,13 +1,13 @@
-package com.example.springbootrestapi;
+package com.example.ems;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringbootRestApiApplication {
+public class EmsBackendApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringbootRestApiApplication.class, args);
+		SpringApplication.run(EmsBackendApplication.class, args);
 	}
 
 }
