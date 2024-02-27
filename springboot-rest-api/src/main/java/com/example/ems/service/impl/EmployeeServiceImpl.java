@@ -8,6 +8,9 @@ import com.example.ems.repository.EmployeeRepository;
 import com.example.ems.service.EmployeeService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
@@ -29,5 +32,13 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee e = employeeRepository.findById(employeeId)
                 .orElseThrow(() -> new EmployeeNotFoundException(employeeId));
         return EmployeeMapper.mapToEmployeeDto(e);
+    }
+
+    @Override
+    public List<EmployeeDto> getAllEmployees() {
+        List<Employee> employees = employeeRepository.findAll();
+        return employees.stream()
+                .map(EmployeeMapper::mapToEmployeeDto)
+                .collect(Collectors.toList());
     }
 }
