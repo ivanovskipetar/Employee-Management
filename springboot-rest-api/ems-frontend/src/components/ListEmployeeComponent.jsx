@@ -1,30 +1,29 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
+import {listEmployees} from "../services/EmployeeService.js";
+import { useNavigate } from 'react-router-dom';
 
 const ListEmployeeComponent = () => {
 
-    const dummy_data = [
-        {
-            "id": 1,
-            "firstName": "Petar",
-            "lastName": "Ivanovski",
-            "email": "petar@gmail.com"
-        },
-        {
-            "id": 2,
-            "firstName": "Lebron",
-            "lastName": "James",
-            "email": "lebron@gmail.com"
-        },
-        {
-            "id": 3,
-            "firstName": "Tom",
-            "lastName": "Cruise",
-            "email": "tom@gmail.com"
-        },
-    ]
+    const [employees, setEmployees] = useState([])
+    const navigator = useNavigate()
+
+    useEffect(() => {
+        listEmployees().then(response => {
+            setEmployees(response.data);
+        }).catch(error => {
+            console.error(error);
+        })
+    }, [] )
+
+    function addNewEmployee(){
+        navigator("/add-employee")
+    }
+
     return (
         <div className='container'>
-            <h2 className='text-center'>List of employees</h2>
+            <h2 className='text-center my-3'>List of employees</h2>
+            <button type="button" className="btn btn-primary mb-3" onClick={addNewEmployee}>Add Employee</button>
+
             <table className='table table-striped table-bordered'>
                 <thead>
                 <tr>
@@ -36,7 +35,7 @@ const ListEmployeeComponent = () => {
                 </thead>
                 <tbody>
                 {
-                    dummy_data.map(employee =>
+                    employees.map(employee =>
                         <tr key={employee.id}>
                             <td>{employee.id}</td>
                             <td>{employee.firstName}</td>
