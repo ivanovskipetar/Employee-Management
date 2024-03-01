@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {listEmployees} from "../services/EmployeeService.js";
+import {deleteEmployee, listEmployees} from "../services/EmployeeService.js";
 import {useNavigate} from 'react-router-dom';
 
 const ListEmployeeComponent = () => {
@@ -8,12 +8,16 @@ const ListEmployeeComponent = () => {
     const navigator = useNavigate()
 
     useEffect(() => {
+        getAllEmployees()
+    }, [])
+
+    function getAllEmployees(){
         listEmployees().then(response => {
             setEmployees(response.data);
         }).catch(error => {
             console.error(error);
         })
-    }, [])
+    }
 
     function addNewEmployee() {
         navigator("/add-employee")
@@ -21,6 +25,15 @@ const ListEmployeeComponent = () => {
 
     function updateEmployee(id) {
         navigator(`/edit-employee/${id}`)
+    }
+
+    function removeEmployee(id) {
+        console.log(id)
+        deleteEmployee(id).then((response) => {
+            getAllEmployees()
+        }).catch(error => {
+            console.error(error)
+        })
     }
 
     return (
@@ -31,11 +44,11 @@ const ListEmployeeComponent = () => {
             <table className='table table-striped table-bordered'>
                 <thead>
                 <tr>
-                    <th>Employee id</th>
+                    <th style={{width: '120px'}}>Employee id</th>
                     <th>Employee first name</th>
                     <th>Employee last name</th>
                     <th>Employee email</th>
-                    <th>Actions</th>
+                    <th style={{width: '176px'}}>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -47,7 +60,12 @@ const ListEmployeeComponent = () => {
                             <td>{employee.lastName}</td>
                             <td>{employee.email}</td>
                             <td>
-                                <button className='btn btn-info' onClick={() => updateEmployee(employee.id)}>Update
+                                <button className='btn btn-info'
+                                        onClick={() => updateEmployee(employee.id)}>Update
+                                </button>
+                                <button className='btn btn-danger'
+                                        onClick={() => removeEmployee(employee.id)}
+                                        style={{marginLeft: '10px'}}>Delete
                                 </button>
                             </td>
                         </tr>

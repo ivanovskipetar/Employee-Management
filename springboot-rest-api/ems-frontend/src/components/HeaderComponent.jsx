@@ -7,7 +7,7 @@ const HeaderComponent = () => {
                 <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
                     <div className="container-fluid">
                         {/* <!-- Navbar brand -->*/}
-                        <a className="navbar-brand mt-2 mt-lg-0" href="#">
+                        <a className="navbar-brand mt-2 mt-lg-0" href="/home">
                             <h5 className="pt-1">EMS</h5>
                         </a>
                         {/*// <!-- Toggle button -->*/}
@@ -22,13 +22,10 @@ const HeaderComponent = () => {
                             {/*// <!-- Left links -->*/}
                             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li className="nav-item">
-                                    <a className="nav-link" href="#">Dashboard</a>
+                                    <a className="nav-link" href="/employees">Employees</a>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="#">Team</a>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link" href="#">Projects</a>
+                                    <a className="nav-link" href="/departments">Departments</a>
                                 </li>
                             </ul>
                             {/*// <!-- Left links -->*/}
