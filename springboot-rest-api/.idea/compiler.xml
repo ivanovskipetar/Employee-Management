@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="employment-management-system" />
+        <module name="ems-backend" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -17,6 +18,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="employment-management-system" options="-parameters" />
+      <module name="ems-backend" options="-parameters" />
       <module name="springboot-rest-api" options="-parameters" />
     </option>
   </component>
